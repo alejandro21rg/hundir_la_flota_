@@ -1,4 +1,5 @@
-from utils import crear_tablero, colocar_barcos, disparar, crear_lista_barcos, crear_lista_barcos_manual, disparo_maquina, quedan_barcos
+from utils_final import crear_tablero, colocar_barcos, disparar, crear_lista_barcos, crear_lista_barcos_manual, disparo_maquina, quedan_barcos, imprimir_tablero
+import time
 
 # Tableros
 tablero_jugador_barcos = crear_tablero()
@@ -34,6 +35,10 @@ while True:
         print("\nTu tablero de disparos:")
         print(tablero_jugador_disparos)
 
+        print("\nDisparos realizados por el jugador:")
+        for d in lista_disparos_jugador:
+             print(d)
+
         resultado = disparar(
             tablero_rival_barcos,
             tablero_jugador_disparos,
@@ -42,13 +47,19 @@ while True:
 
         print("Resultado:", resultado)
 
+        time.sleep(1.5)
+
+        print("\nTablero actualizado:")
+        imprimir_tablero(tablero_jugador_disparos)
+        time.sleep(1.5)
+
         # Jugador gana
         if not quedan_barcos(tablero_rival_barcos):
             print("\n ¡HAS GANADO! Has conseguido 30 min. más de descanso")
             break
 
         if "Tocado" in resultado:
-            print("¡Repites turno!")
+            print("¡Te toca tirar de nuevo!")
             continue
         else:
             break
@@ -61,6 +72,13 @@ while True:
     #  TURNO RIVAL
 
     while True:
+        print("\nTurno del rival...")
+        time.sleep(1.5)
+
+        print("\nDisparos del rival hasta ahora:")
+        for d in lista_disparos_rival:
+            print(d)
+
         resultado_maquina = disparo_maquina(
             tablero_jugador_barcos,
             tablero_rival_disparos,
@@ -69,8 +87,12 @@ while True:
 
         print("\n" + resultado_maquina)
 
+        time.sleep(1.5)
+
         print("\nTu tablero de barcos:")
         print(tablero_jugador_barcos)
+
+        time.sleep(1.5)
 
         # Rival gana
         if not quedan_barcos(tablero_jugador_barcos):
@@ -78,7 +100,7 @@ while True:
             break
 
         if "Tocado" in resultado_maquina:
-            print("El rival repite turno")
+            print("Al rival le toca tirar de nuevo")
             continue
         else:
             break
