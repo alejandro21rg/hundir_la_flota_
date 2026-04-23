@@ -1,6 +1,8 @@
 # hundir_la_flota_
 
 Proyecto python en terminal
-version --
-librerias
--numpy
+version -- 3.12
+librerias:
+  -Numpy
+  -Time
+
