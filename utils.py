@@ -19,7 +19,7 @@ def colocar_barcos(lista_barcos, tablero):
     return tablero
 
 
-def disparar(tablero_rival, tablero_disparos, lista_disparo):
+def disparar(tablero_rival, tablero_disparos, lista_disparo, lista_barcos):
 
     while True:
         try:
@@ -47,14 +47,26 @@ def disparar(tablero_rival, tablero_disparos, lista_disparo):
     # Registrar disparo
     lista_disparo.append(casilla)
 
-    # Resultado
+
+# Si acierta
     if tablero_rival[fila][columna] == "O":
         tablero_rival[fila][columna] = "X"
         tablero_disparos[fila][columna] = "X"
-        return "Tocado"
+
+        # comprobar si se ha hundido
+        for barco in lista_barcos:
+           if (fila, columna) in barco:
+            if esta_hundido(barco, tablero_rival):
+                return "¡Tocado y Hundido!"
+            else:
+                return "Tocado"
+
+# Si falla 
     else:
         tablero_disparos[fila][columna] = "A"
         return "Agua, tienes menos puntería que los jugadores del Cádiz C.F"
+    
+        
 
 
 # Disparo máquina
@@ -103,6 +115,12 @@ def es_valido(barco, tablero):
             return False
     return True
 
+# Barco Hundido
+def esta_hundido(barco, tablero):
+    for fila, col in barco:
+        if tablero[fila][col] != "X":
+            return False
+    return True
 
 # Crear lista barcos
 def crear_lista_barcos():

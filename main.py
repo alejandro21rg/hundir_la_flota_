@@ -42,7 +42,8 @@ while True:
         resultado = disparar(
             tablero_rival_barcos,
             tablero_jugador_disparos,
-            lista_disparos_jugador   
+            lista_disparos_jugador,
+            lista_barcos_rival   
         )
 
         print("Resultado:", resultado)
