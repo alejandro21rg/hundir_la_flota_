@@ -2,6 +2,7 @@ from utils_final import crear_tablero, colocar_barcos, disparar, crear_lista_bar
 import time
 
 # Tableros
+
 tablero_jugador_barcos = crear_tablero()
 tablero_jugador_disparos = crear_tablero()
 
@@ -9,10 +10,12 @@ tablero_rival_barcos = crear_tablero()
 tablero_rival_disparos = crear_tablero()
 
 # Lista de disparos
+
 lista_disparos_jugador = []
 lista_disparos_rival = []
 
 # Crear barcos
+
 print("===> BIENVENIDO A HUNDIR LA FLOTA, COLOCA TUS BARCOS <===")
 lista_barcos_jugador = crear_lista_barcos_manual()
 
@@ -20,16 +23,18 @@ print("\n===> COLOCANDO BARCOS DEL RIVAL <===")
 lista_barcos_rival = crear_lista_barcos()
 
 # Colocar barcos
+
 colocar_barcos(lista_barcos_jugador, tablero_jugador_barcos)
 colocar_barcos(lista_barcos_rival, tablero_rival_barcos)
 
 print("\n=== EMPIEZA EL JUEGO ===")
 
-#  Bucle principal
+# Bucle principal
+
 while True:
 
   
-    # TURNO JUGADOR
+    # Turno Jugador
    
     while True:
         print("\nTu tablero de disparos:")
@@ -65,12 +70,12 @@ while True:
         else:
             break
 
-    # salir si gana jugador
+    # Terminar juego si gana jugador
     if not quedan_barcos(tablero_rival_barcos):
         break
 
   
-    #  TURNO RIVAL
+    # Turno Rival
 
     while True:
         print("\nTurno del rival...")
@@ -83,7 +88,8 @@ while True:
         resultado_maquina = disparo_maquina(
             tablero_jugador_barcos,
             tablero_rival_disparos,
-            lista_disparos_rival
+            lista_disparos_rival,
+            lista_barcos_jugador
         )
 
         print("\n" + resultado_maquina)
@@ -106,6 +112,7 @@ while True:
         else:
             break
 
-    # salir si pierde jugador
+    # Terminar juego si gana el rival
+    
     if not quedan_barcos(tablero_jugador_barcos):
         break

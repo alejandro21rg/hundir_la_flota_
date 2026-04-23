@@ -18,6 +18,7 @@ def colocar_barcos(lista_barcos, tablero):
             tablero[fila][col] = "O"
     return tablero
 
+# Disparar
 
 def disparar(tablero_rival, tablero_disparos, lista_disparo, lista_barcos):
 
@@ -70,7 +71,8 @@ def disparar(tablero_rival, tablero_disparos, lista_disparo, lista_barcos):
 
 
 # Disparo máquina
-def disparo_maquina(tablero_objetivo_r, tablero_disparos_r, lista_disparos):
+
+def disparo_maquina(tablero_objetivo_r, tablero_disparos_r, lista_disparos, lista_barcos):
     while True:
         fila = np.random.randint(0, 10)
         columna = np.random.randint(0, 10)
@@ -83,8 +85,14 @@ def disparo_maquina(tablero_objetivo_r, tablero_disparos_r, lista_disparos):
             if tablero_objetivo_r[fila][columna] == "O":
                 tablero_objetivo_r[fila][columna] = "X"
                 tablero_disparos_r[fila][columna] = "X"
-                return f"Rival dispara a {casilla}: Tocado"
-
+                
+                  # Comprobar si se ha hundido
+                for barco in lista_barcos:
+                    if casilla in barco:
+                        if esta_hundido(barco, tablero_objetivo_r):
+                            return f"Rival dispara a {casilla}: ¡Tocado y Hundido!"
+                        else:
+                            return f"Rival dispara a {casilla}: Tocado"
             else:
                 tablero_objetivo_r[fila][columna] = "A"
                 tablero_disparos_r[fila][columna] = "A"
@@ -92,6 +100,7 @@ def disparo_maquina(tablero_objetivo_r, tablero_disparos_r, lista_disparos):
 
 
 # Crear barco aleatorio
+
 def crear_barco(eslora):
     orientacion = np.random.choice(["H", "V"])
 
@@ -109,6 +118,7 @@ def crear_barco(eslora):
 
 
 # Validar barco
+
 def es_valido(barco, tablero):
     for fila, col in barco:
         if tablero[fila][col] != "_":
@@ -116,6 +126,7 @@ def es_valido(barco, tablero):
     return True
 
 # Barco Hundido
+
 def esta_hundido(barco, tablero):
     for fila, col in barco:
         if tablero[fila][col] != "X":
@@ -123,6 +134,7 @@ def esta_hundido(barco, tablero):
     return True
 
 # Crear lista barcos
+
 def crear_lista_barcos():
     lista_esloras = [2, 2, 2, 3, 3, 4]
     tablero_aux = crear_tablero()
@@ -142,6 +154,7 @@ def crear_lista_barcos():
     return lista_barcos
 
 # Crear barco manual
+
 def crear_barco_manual(eslora):
     print(f"\nColoca un barco de tamaño {eslora}")
 
@@ -166,6 +179,7 @@ def crear_barco_manual(eslora):
                 print("Orientación incorrecta. Usa solo H o V.")
 
     # Crear Barco       
+    
     barco = []
 
     for i in range(eslora):
