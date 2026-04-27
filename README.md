@@ -1,5 +1,6 @@
 Descripción
-Proyecto python en versión terminal -- 3.12 librerías: -Numpy -Time
+Proyecto python en versión terminal -- 3.12 
+Librerías: -Numpy -Time
 Este proyecto implementa el clásico juego de estrategia Hundir la Flota, donde dos jugadores intentan adivinar la ubicación de los barcos del oponente en un tablero oculto.
 
 El objetivo es destruir toda la flota enemiga antes de que el rival haga lo mismo.
